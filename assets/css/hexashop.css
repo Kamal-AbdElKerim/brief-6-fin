@@ -1064,8 +1064,19 @@ responsive
     margin-bottom: 30px;
   }
 }
-
+.video{
+  width: 640px;
+  height: 360px;
+  border-radius: 20px;
+  
+}
 @media (max-width: 767px) {
+  .video{
+    width: 410px !important;
+    height: 260px;
+    
+    
+  }
   .main-banner .left-content .thumb .inner-content {
     left: 50%;
     top: 47.5%;

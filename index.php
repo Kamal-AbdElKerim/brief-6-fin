@@ -49,14 +49,12 @@ $isActive = 'index.php';
          
             $userData = $stmt->fetch();}
             
-         if (!empty($userData)) {
-            $_SESSION['user_id'] = $userData['id'] ;
-            $_SESSION['name']    = $userData['username'] ;
-          
-         }
+       
             
     
             if (!empty($userData) ) {
+             
+                $_SESSION['name']    = $userData['username'] ;
                 
                  header("Location: products.php");
                 exit();
@@ -85,11 +83,11 @@ $isActive = 'index.php';
                     <form method="post"  >
                       <div class="form-group mb-4 ">
                         <label for="exampleInputEmail1" class="form-label">Name</label>
-                        <input type="text" name="name" value="<?php   echo $name ?? '';  ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input  type="text" name="name" value="<?php   echo $name ?? '';  ?>" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp">
                       </div>
                       <div class="form-group mb-5 ">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="Password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" name="Password" class="form-control rounded-pill" id="exampleInputPassword1">
                       </div>
                       <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                      <!-- Error message -->
@@ -108,7 +106,7 @@ $isActive = 'index.php';
                 
 
           <div class="col-lg-6  align-items-center justify-content-center">
-          <h1 class="user-select-all">welcome back <?php echo $_SESSION['name'] ?></h1>
+          <h1 class="user-select-all text-center">welcome back <?php echo $_SESSION['name'] ?></h1>
  
           </div>
                   
@@ -118,11 +116,9 @@ $isActive = 'index.php';
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-12">
-                        <video width="640" height="360" autoplay controls loop muted style="border-radius: 20px;">
+                        <video class="video" autoplay controls loop muted >
                                 <source src="assets/video/Uncharted.mp4" type="video/mp4">
-                                <!-- Optionally, you can provide multiple source elements for different formats -->
-                                <!-- <source src="path_to_your_video/video.webm" type="video/webm"> -->
-                                <!-- <source src="path_to_your_video/video.ogv" type="video/ogg"> -->
+                               
                                 Your browser does not support the video tag.
                             </video>
                         </div>

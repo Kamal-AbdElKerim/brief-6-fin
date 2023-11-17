@@ -71,6 +71,11 @@ $result_all = $stmt->fetchAll();
         $result = $result_all;
     }
 
+    $resultsPerPage = 5;
+
+    
+
+    
 ?>
 
 
@@ -92,7 +97,7 @@ $result_all = $stmt->fetchAll();
     'menu header header header header header'
     'menu main main main main main'
     
-    'menu footer footer footer footer footer';
+    'footer footer footer footer footer footer';
   gap: 47px;
   padding: 10px;
 }
@@ -261,7 +266,7 @@ if (isset($_SESSION['name'])) {
                   
              
             </div>  
-                <div class="item5">Footer</div>
+
                 </div>
                         
                         </div>
@@ -276,8 +281,8 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-12">
                     <div class="inner-content">
                         <h2 >Check Our Products</h2>
-                        <span>Awesome &amp; You must Log in first</span>
-                        <a class="btn btn-primary ms-4" href="index.php">Log in</a>
+                        <h3 class="text-light"> &amp; You must Log in first</h3>
+                        <a class="btn btn-primary ms-4 p-2" href="index.php">Log in</a>
                     </div>
                 </div>
             </div>
