@@ -172,7 +172,7 @@ if (isset($_SESSION['name'])) {
 
             <div class="item1 d-flex justify-content-end align-items-center">
                 <span> Trier par : <span class="invisible">l</span> </span>
-                <select id="mySelect" name="quantity" class="form-select w-25" aria-label="Default select example" >
+                <select id="mySelect" name="quantity" class="form-select w-25 " aria-label="Default select example" style="width:17% !important;">
                        
                         <option <?php if (isset($_POST["quantity"]) && $_POST["quantity"] === "0"  ) {echo 'selected';}else {echo 'selected';}  ?>   value="0">All</option>
                         <option <?php if (isset($_POST["quantity"]) && $_POST["quantity"] === "2"  ) echo 'selected'; ?>    value="2">Quantité, croissant </option>
@@ -195,24 +195,24 @@ if (isset($_SESSION['name'])) {
     <ul class="list-group">
     <li class="list-group-item">
     <input id="firstCheckboxStretched" class="form-check-input me-1 min" type="checkbox" value="2" name="categories[]" <?php if (isset($categories) && in_array('2', $categories)) echo 'checked'; ?>>
-    <label class="form-check-label stretched-link o1" for="firstCheckboxStretched">Processeurs</label>
+    <label class="form-check-label stretched-link o1 small-text" for="firstCheckboxStretched">Processeurs</label>
     </li> 
     <li class="list-group-item">
     <input id="secondCheckboxStretched" class="form-check-input me-1 min"  type="checkbox" value="3" name="categories[]" <?php if (isset($categories) && in_array('3', $categories)) echo 'checked'; ?>>
-    <label class="form-check-label stretched-link o2" for="secondCheckboxStretched">Cartes graphiques</label>
+    <label class="form-check-label stretched-link o2 small-text" for="secondCheckboxStretched">Cartes graphiques</label>
     </li>
     
     
     <li class="list-group-item">
     <input  id="thirdCheckboxStretched" class="form-check-input me-1 min"  type="checkbox" value="1" name="categories[]" <?php if (isset($categories) && in_array('1', $categories)) echo 'checked'; ?>>
-    <label class="form-check-label stretched-link" for="thirdCheckboxStretched">Boitiers PC</label>
+    <label class="form-check-label stretched-link small-text" for="thirdCheckboxStretched">Boitiers PC</label>
     </li>
    <br>
     <h5>Quantité min</h5>
     <ul  class="list-group">
     <li class="list-group-item">
     <input  id="thirdCheckboxStretched2" class="form-check-input me-1 min"  type="checkbox" value="4" name="quantite_min" <?php if (isset($_POST["quantite_min"]) && $_POST["quantite_min"] === "4" ) echo 'checked'; ?> >
-    <label class="form-check-label stretched-link" for="thirdCheckboxStretched2">Quantite min</label>
+    <label class="form-check-label stretched-link small-text" for="thirdCheckboxStretched2">Quantite min</label>
     </li>
     </ul>
     </ul>

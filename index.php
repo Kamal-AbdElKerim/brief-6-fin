@@ -2,7 +2,12 @@
 <?php include 'layout/coon.php';
 $isActive = 'index.php';
 
-
+if (isset($_POST["sign_out"])) {
+    // Perform logout actions here, then redirect to index.php
+    session_destroy();
+    header("Location: index.php");
+    exit(); // Ensure script execution stops after the redirection header
+}
 
 ?>
 
@@ -10,29 +15,51 @@ $isActive = 'index.php';
 <html lang="en">
 
      <?php    include 'layout/head.php'; ?>
-    
+     
+     <style>
+     /* Optional: Custom styling for the carousel */
+     .carousel-item {
+      height: 450px; /* Set your desired height */
+    }
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Image will cover the entire slide */
+    }
+      /* Custom styles for Next and Previous buttons */
+      .carousel-control-prev,
+    .carousel-control-next {
+      color: #0b0b0b; /* Change the color of the text */
+    }
+
+    /* Change color on hover/focus for Next and Previous buttons */
+    .carousel-control-prev:hover,
+    .carousel-control-prev:focus,
+    .carousel-control-next:hover,
+    .carousel-control-next:focus {
+      color: #0b0b0b; /* Change the color of the text on hover/focus */
+      text-decoration: none; /* Remove underline */
+      outline: 0; /* Remove outline */
+    }
+        /* Custom styles for carousel control icons */
+        .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      fill: #0b0b0b; /* Change the color of the control icons */
+    }
+  </style>
     <body>
     
 
    <?php include 'layout/navbar.php' ;
    
-   if (isset($_POST["sign_out"])) {
-    // Perform logout actions here, then redirect to index.php
-    session_destroy();
-    header("Location: index.php");
-    exit(); // Ensure script execution stops after the redirection header
-}
+
    
    
    
    ?>
 
 
-   <div class="main-banner" id="top">
-
-        <!-- ***** form  ***** -->
-        <div class="subscribe">
-        <div class="container">
+  
    <?php
 
 
@@ -69,7 +96,16 @@ $isActive = 'index.php';
    ?>
 
 
+<div class="page-index" id="top">
 
+<?php include 'layout/start.php' ?>
+</div>
+
+<div class="page-index" id="top">
+
+<!-- ***** form  ***** -->
+<div class="subscribe">
+<div class="container">
          
             <div class="row">
         <?php 
@@ -89,7 +125,7 @@ $isActive = 'index.php';
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" name="Password" class="form-control rounded-pill" id="exampleInputPassword1">
                       </div>
-                      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                      <button name="submit" type="submit" class="btn btn-primary mb-5">Submit</button>
                      <!-- Error message -->
                      <?php if (isset($error_message , $_POST['submit']) && empty($userData) ) { ?>
                         <div class="alert alert-danger mt-4" role="alert">
@@ -105,7 +141,7 @@ $isActive = 'index.php';
                     
                 
 
-          <div class="col-lg-6  align-items-center justify-content-center">
+          <div class="col-lg-6  align-items-center justify-content-center mb-5">
           <h1 class="user-select-all text-center">welcome back <?php echo $_SESSION['name'] ?></h1>
  
           </div>
@@ -135,6 +171,16 @@ $isActive = 'index.php';
    <?php include 'layout/footer.php' ; ?>
 
    <?php include 'layout/js.php' ; ?>
-    
+
+   <script>
+    // Activate the carousel
+    document.addEventListener("DOMContentLoaded", function () {
+      var myCarousel = document.getElementById('myCarousel');
+      var carousel = new bootstrap.Carousel(myCarousel, {
+        interval: 2600 // Adjust the interval (in milliseconds) for auto sliding
+      });
+    });
+  </script>
+
   </body>
 </html>
