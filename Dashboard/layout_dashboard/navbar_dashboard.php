@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-light fixed-top " style="background-color: #f9f9f9;">
     <div class="container-fluid">
       <a href="index.php" class="navbar-brand ms-5" >
@@ -13,14 +12,13 @@
    
         </ul>
         <ul class="navbar navbar-nav navbar-right" style="display:flex;">
-        <li class="nav-item me-4"><a class="nav-link <?php if ($isActive === "index.php") echo ' activee"'; ?>" href="index.php" >Home</a></li>
                                                                         
-          <li class="nav-item me-4"><a class="nav-link <?php if ($isActive === "products.php") echo ' activee'; ?>" href="products.php" >Products</a></li>
-        
-       
-                    </ul>
+          <li class="nav-item me-4"><a class="nav-link <?php if ($isActive === "products.php") echo ' activee'; ?>" href="products.php" >Front</a></li>
+                                    
+
+          <li class="nav-item me-4"><a class="nav-link <?php if ($isActive === "products.php") echo ' activee'; ?>" href="index.php" >sing out</a></li>
+       </ul>
         </ul>
       </div>
     </div>
   </nav>
-

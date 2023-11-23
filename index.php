@@ -1,12 +1,47 @@
 
 <?php include 'layout/coon.php';
 $isActive = 'index.php';
+?>
 
-if (isset($_POST["sign_out"])) {
-    // Perform logout actions here, then redirect to index.php
-    session_destroy();
-    header("Location: index.php");
-    exit(); // Ensure script execution stops after the redirection header
+<?php 
+if (isset($_POST['submit'])) {
+      // Retrieve form data
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (!empty($email) && !empty($password)) {
+     
+   
+
+    // Check against admin table
+    $admin_query = "SELECT * FROM admin WHERE  Email = '$email' AND Password = '$password'";
+    $admin_result = $conn->query($admin_query);
+    $AdminData = $admin_result->fetch();
+
+    // Check against user table
+    $user_query = "SELECT * FROM users WHERE  Email = '$email' AND Password = '$password'";
+    $user_result = $conn->query($user_query);
+    $userData = $user_result->fetch();
+
+    if (!empty($AdminData)) {
+      
+        header("Location: dashboard_Categories.php");
+        $_SESSION["admin"] = $AdminData["Email"];
+        exit();
+    } elseif (!empty($userData)) {
+        
+        header("Location: products.php");
+        $_SESSION["user"] = $userData["Email"];
+        exit();
+    } else {
+        // Invalid credentials
+        $error_message = "Invalid email or password. Please try again.";
+    }
+} else{
+  $error_message = "Email and password are required.";
+}
+
+
 }
 
 ?>
@@ -16,37 +51,7 @@ if (isset($_POST["sign_out"])) {
 
      <?php    include 'layout/head.php'; ?>
      
-     <style>
-     /* Optional: Custom styling for the carousel */
-     .carousel-item {
-      height: 450px; /* Set your desired height */
-    }
-    .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Image will cover the entire slide */
-    }
-      /* Custom styles for Next and Previous buttons */
-      .carousel-control-prev,
-    .carousel-control-next {
-      color: #0b0b0b; /* Change the color of the text */
-    }
 
-    /* Change color on hover/focus for Next and Previous buttons */
-    .carousel-control-prev:hover,
-    .carousel-control-prev:focus,
-    .carousel-control-next:hover,
-    .carousel-control-next:focus {
-      color: #0b0b0b; /* Change the color of the text on hover/focus */
-      text-decoration: none; /* Remove underline */
-      outline: 0; /* Remove outline */
-    }
-        /* Custom styles for carousel control icons */
-        .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      fill: #0b0b0b; /* Change the color of the control icons */
-    }
-  </style>
     <body>
     
 
@@ -66,31 +71,7 @@ if (isset($_POST["sign_out"])) {
 
 
 
-        if (isset($_POST['submit'])) {
-            $name = htmlspecialchars($_POST['name']);
-            $password = htmlspecialchars($_POST['Password']); 
-          
-    
-    
-            $stmt = $conn->query("SELECT * FROM users WHERE username = '$name' AND Password = '$password'");
-         
-            $userData = $stmt->fetch();}
-            
-       
-            
-    
-            if (!empty($userData) ) {
-             
-                $_SESSION['name']    = $userData['username'] ;
-                
-                 header("Location: products.php");
-                exit();
-            } else {
-                $error_message = "Invalid username or password";
-            }
-        
-    
-        
+      
 
    
    ?>
@@ -104,66 +85,40 @@ if (isset($_POST["sign_out"])) {
 <div class="page-index" id="top">
 
 <!-- ***** form  ***** -->
-<div class="subscribe">
+
 <div class="container">
          
             <div class="row">
-        <?php 
-       
-        
-        if (!isset($_SESSION['name'])) {
-   
 
-   ?>
                 <div class="col-lg-6  align-items-center justify-content-center">
                     <form method="post"  >
                       <div class="form-group mb-4 ">
-                        <label for="exampleInputEmail1" class="form-label">Name</label>
-                        <input  type="text" name="name" value="<?php   echo $name ?? '';  ?>" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="exampleInputEmail1" class="form-label">email</label>
+                        <input  type="text" name="email" value="" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp">
                       </div>
                       <div class="form-group mb-5 ">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="Password" class="form-control rounded-pill" id="exampleInputPassword1">
+                        <input type="password" name="password" class="form-control rounded-pill" id="exampleInputPassword1">
                       </div>
                       <button name="submit" type="submit" class="btn btn-primary mb-5">Submit</button>
-                     <!-- Error message -->
-                     <?php if (isset($error_message , $_POST['submit']) && empty($userData) ) { ?>
+                 
+                     <?php if (isset($error_message , $_POST['submit'])  ) { ?>
                         <div class="alert alert-danger mt-4" role="alert">
                             <?php echo $error_message; ?>
-                        </div>
-                    <?php } ?>
+                        </div> 
+                   
 
                    
                     </form>
                   </div>
-
-                  <?php }else {    ?>
-                    
-                
-
-          <div class="col-lg-6  align-items-center justify-content-center mb-5">
-          <h1 class="user-select-all text-center">welcome back <?php echo $_SESSION['name'] ?></h1>
- 
-          </div>
                   
-                 <?php    } ?>
+                <?php    } ?> 
 
 
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-12">
-                        <video class="video" autoplay controls loop muted >
-                                <source src="assets/video/Uncharted.mp4" type="video/mp4">
-                               
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                      
-                    </div>
-                </div>
+           
             </div>
         </div>
-    </div>
+   
     </div>
  
 
@@ -172,15 +127,7 @@ if (isset($_POST["sign_out"])) {
 
    <?php include 'layout/js.php' ; ?>
 
-   <script>
-    // Activate the carousel
-    document.addEventListener("DOMContentLoaded", function () {
-      var myCarousel = document.getElementById('myCarousel');
-      var carousel = new bootstrap.Carousel(myCarousel, {
-        interval: 2600 // Adjust the interval (in milliseconds) for auto sliding
-      });
-    });
-  </script>
+
 
   </body>
 </html>

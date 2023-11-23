@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'application_électroniques';
+$dbname = 'best_électroniques';
 $username = 'root';
 $password = '';
 

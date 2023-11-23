@@ -256,6 +256,11 @@ Products Page
   margin-bottom: 30px;
 
 }
+.page-dashboard {
+  margin-top: 90px;
+  margin-bottom: 30px;
+
+}
 
 .page-heading .inner-content {
   padding: 150px 0px;
@@ -337,3 +342,55 @@ responsive
 
 
 
+     /* Optional: Custom styling for the carousel */
+     .carousel-item {
+      height: 450px; /* Set your desired height */
+    }
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Image will cover the entire slide */
+    }
+      /* Custom styles for Next and Previous buttons */
+      .carousel-control-prev,
+    .carousel-control-next {
+      color: #0b0b0b; /* Change the color of the text */
+    }
+
+    /* Change color on hover/focus for Next and Previous buttons */
+    .carousel-control-prev:hover,
+    .carousel-control-prev:focus,
+    .carousel-control-next:hover,
+    .carousel-control-next:focus {
+      color: #0b0b0b; /* Change the color of the text on hover/focus */
+      text-decoration: none; /* Remove underline */
+      outline: 0; /* Remove outline */
+    }
+        /* Custom styles for carousel control icons */
+        .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      fill: #0b0b0b; /* Change the color of the control icons */
+    }
+
+
+    .item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'menu header header header header header'
+    'menu main main main main main'
+    
+    'footer footer footer footer footer footer';
+  gap: 47px;
+  padding: 10px;
+}
+
+.grid-container > div {
+ 
+  padding: 20px 0;
+
+}
