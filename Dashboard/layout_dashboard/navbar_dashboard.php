@@ -15,8 +15,10 @@
                                                                         
           <li class="nav-item me-4"><a class="nav-link <?php if ($isActive === "products.php") echo ' activee'; ?>" href="products.php" >Front</a></li>
                                     
+           <form action="index.php" method="post">
+          <li class="nav-item me-4">  <button name="sing_out" class="nav-link ">sing out</button> </li>
 
-          <li class="nav-item me-4"><a class="nav-link <?php if ($isActive === "products.php") echo ' activee'; ?>" href="index.php" >sing out</a></li>
+           </form>
        </ul>
         </ul>
       </div>

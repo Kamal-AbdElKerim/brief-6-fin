@@ -1,48 +1,91 @@
 
 <?php include 'layout/coon.php';
 $isActive = 'index.php';
+
+if (isset($_POST['sing_out'])) { 
+  session_destroy();
+  header("Location: index.php");
+  
+}
+
+
+
+if (isset($_POST['submit'])) {
+  // Retrieve form data
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+if (isset($_POST['email']) && isset($_POST['password'])) {
+ 
+
+
+// Check against admin table
+$admin_query = "SELECT * FROM admin WHERE  Email = '$email' AND Password = '$password'";
+$admin_result = $conn->query($admin_query);
+$AdminData = $admin_result->fetch();
+
+
+// Check against user table
+$user_query = "SELECT * FROM users WHERE  Email = '$email' AND Password = '$password'";
+$user_result = $conn->query($user_query);
+$userData = $user_result->fetch();
+
+
+
+
+if (!empty($AdminData)) {
+  
+    header("Location: dashboard_Categories.php");
+    $_SESSION["admin"] = $AdminData["Email"];
+    exit();
+} else {
+  // Invalid credentials
+  $error_message = "Invalid email or password. Please try again.";
+}
+
+if (!empty($userData) && $userData["is_Active"] === 1) {
+    
+    header("Location: products.php");
+    $_SESSION["user"] = $userData["Email"];
+    exit();
+}else if (!empty($userData) && $userData["is_Active"] === 0) {
+
+  $color = "warning" ;
+
+  $error_message = "Hello " . $userData['name'] . " You must wait for your acceptance by the admin.";
+}
+
+
+
+
+else {
+    // Invalid credentials
+    $color = "danger" ;
+    $error_message = "Invalid email or password. Please try again.";
+}
+} else{
+  $color = "danger" ;
+$error_message = "Email and password are required.";
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
 
 <?php 
-if (isset($_POST['submit'])) {
-      // Retrieve form data
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    if (!empty($email) && !empty($password)) {
-     
-   
-
-    // Check against admin table
-    $admin_query = "SELECT * FROM admin WHERE  Email = '$email' AND Password = '$password'";
-    $admin_result = $conn->query($admin_query);
-    $AdminData = $admin_result->fetch();
-
-    // Check against user table
-    $user_query = "SELECT * FROM users WHERE  Email = '$email' AND Password = '$password'";
-    $user_result = $conn->query($user_query);
-    $userData = $user_result->fetch();
-
-    if (!empty($AdminData)) {
-      
-        header("Location: dashboard_Categories.php");
-        $_SESSION["admin"] = $AdminData["Email"];
-        exit();
-    } elseif (!empty($userData)) {
-        
-        header("Location: products.php");
-        $_SESSION["user"] = $userData["Email"];
-        exit();
-    } else {
-        // Invalid credentials
-        $error_message = "Invalid email or password. Please try again.";
-    }
-} else{
-  $error_message = "Email and password are required.";
-}
-
-
-}
 
 ?>
 
@@ -55,10 +98,15 @@ if (isset($_POST['submit'])) {
     <body>
     
 
-   <?php include 'layout/navbar.php' ;
+   <?php
    
 
    
+   
+   include 'layout/navbar.php' ;
+   
+
+
    
    
    ?>
@@ -79,47 +127,51 @@ if (isset($_POST['submit'])) {
 
 <div class="page-index" id="top">
 
-<?php include 'layout/start.php' ?>
 </div>
 
 <div class="page-index" id="top">
 
 <!-- ***** form  ***** -->
 
-<div class="container">
-         
-            <div class="row">
-
-                <div class="col-lg-6  align-items-center justify-content-center">
-                    <form method="post"  >
-                      <div class="form-group mb-4 ">
-                        <label for="exampleInputEmail1" class="form-label">email</label>
-                        <input  type="text" name="email" value="" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp">
-                      </div>
+<div class="container overflow-hidden ">
+  <div class="row gy-3">
+    <div class=" col-sm-6 ">
+      <div class="p-3">
+      <form  method="post"  >
+        <h4>Log in :</h4>
+                        <div class="col-12">
+                            <label for="inputEmail4" class="form-label">Email</label>
+                            <input type="text" name="email" class="form-control" id="inputEmail4">
+                          </div>
                       <div class="form-group mb-5 ">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control rounded-pill" id="exampleInputPassword1">
                       </div>
-                      <button name="submit" type="submit" class="btn btn-primary mb-5">Submit</button>
+                      <button  name="submit" type="submit" class="btn btn-primary mb-5">Submit</button>
                  
-                     <?php if (isset($error_message , $_POST['submit'])  ) { ?>
-                        <div class="alert alert-danger mt-4" role="alert">
+                  <div id="error">
+                  <?php if (isset($error_message , $_POST['submit'])  ) { ?>
+                        <div class="alert alert-<?= $color ?> mt-2" role="alert">
                             <?php echo $error_message; ?>
                         </div> 
-                   
+                        <?php    } ?> 
+                  </div>
 
                    
                     </form>
                   </div>
                   
-                <?php    } ?> 
-
-
-           
-            </div>
-        </div>
-   
+               
+      </div>
     </div>
+    <div class=" col-sm-6 ">
+     
+
+      </div>
+    </div>
+ 
+  </div>
+</div>
  
 
     
@@ -127,7 +179,29 @@ if (isset($_POST['submit'])) {
 
    <?php include 'layout/js.php' ; ?>
 
+   <script>
+  function login() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "login.php" , true);
 
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+     
+      document.getElementById("myform").innerHTML = xhr.responseText;
+
+     
+    } else {
+      console.error('Request failed');
+    }
+  };
+
+  xhr.onerror = function() {
+    console.error('Request failed');
+  };
+
+  xhr.send();
+}
+</script>
 
   </body>
 </html>

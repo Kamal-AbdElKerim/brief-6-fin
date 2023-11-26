@@ -1,5 +1,6 @@
 <?php include 'layout/coon.php';
 
+
 ?>
 <?php if ( !empty($_SESSION["admin"])) {  ?>
  
@@ -66,7 +67,7 @@ $Description = $_POST['Description'];
 
 
 $user_result = $conn->query("SELECT * FROM `categorie`");
-$userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
+$categorieData = $user_result->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -89,16 +90,15 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
   padding: 0;
   font-family: 'Arvo', serif;
   
-
 }
-.chose a{
+.chose {
   text-decoration: none;
-  padding: 20px 30px !important;
+  padding: 30px;
   color: #f9f9f9;
   border-radius: 25px;
-
+  
 }
-.chose a:hover{
+.chose:hover{
  
   background-color: #8e8a8a47;
  
@@ -111,10 +111,7 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
   width: 21% !important;
 } */
 
-.form{
-  background-color: #495057;
-  
-}
+
 .label_file {
 	display: block;
 	width: 60vw;
@@ -126,7 +123,10 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
 	line-height: 2.5em;
 	text-align: center;
 }
+body{
+  background-color: #495057;
 
+}
 .label_file:hover {
 	background-color: cornflowerblue;
 }
@@ -161,22 +161,20 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
 
   <div class=" text-center ">
         <div class="row">
-          <div class="col-sm-3 bg-black p-5 width" >
-          <div class="mb-5 chose">
-          <a class="active"  href="dashboard_Categories.php">Ajouter Catégories</a>
-          </div>
-          <div class="mb-5 chose">
-          <a  href="dashboard_Products.php">Ajouter Produits</a>
-          </div>
-          <div class="mb-5 chose">
-          <a  href="dashboard_Utilisateurs.php">Liste des Utilisateurs</a>
-          </div>
-          <div class="mb-5 chose">
-          <a  href="dashboard_Visiteurs.php">Liste des Visiteurs</a>  
-          </div>
-          
-          </div>
-          <div class="col-sm-9 form">
+        <div class="col-sm-12 bg-black p-4 " >
+         
+         <a class="mb-5 chose active"  href="dashboard_Categories.php">Ajouter Catégories</a>
+       
+        
+         <a class="mb-5 chose"  href="dashboard_Products.php">Ajouter Produits</a>
+       
+         <a class="mb-5 chose"  href="dashboard_Admins.php">Liste des Admins</a>
+       
+        
+       
+         
+         </div>
+          <div class="col-sm-12 form">
             <div class="row">
               <form  method="post" enctype="multipart/form-data">
               <div class="col-12 col-sm-12  p-5 text-light text-start">
@@ -228,7 +226,7 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <?php foreach ($userData as  $value) {   ?>
+                  <?php foreach ($categorieData as  $value) {   ?>
                     
                  
                     <tr>
@@ -238,8 +236,21 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
                   
                     <td >
                     <a class="btn btn-success mb-2 ms-2" href="Dashboard/update_categorie.php?id=<?= $value['id'] ?>">update</a>
+
+                  
+                   
+                    <button onclick="NoneRequest(<?= $value['id'] ?>, this)" class="btn btn-<?php if (is_null($value['deleted_at'])) {
+                      echo "info" ;
+                    }else {
+                      echo "secondary" ;
+                    } ?> mb-2 ms-2" type="button" ><div id="result_<?= $value['id'] ?>"><?php if (is_null($value['deleted_at'])) {
+                      echo "None" ;
+                    }else {
+                      echo "Block" ;
+                    } ?></div></button>
+
                     <a class="btn btn-danger mb-2 ms-2 modal-trigger" data-bs-toggle="modal" data-bs-id="<?= $value['id'] ?>" data-bs-name="<?= $value['Nom'] ?>" href="#">delete</a>
-                    <a class="btn btn-success mb-2 ms-2" href="Dashboard/masquer_categorie.php?id=<?= $value['id'] ?>">masquer</a>
+
                     </td>
                     </tr>
                
@@ -247,6 +258,8 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
               
                 </tbody>
                 </table>
+                <div id="rebons"></div>
+            
             
             </div>
           </div>
@@ -279,6 +292,45 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include 'layout/js.php' ; ?>
 <script>
+function NoneRequest(id, button) {
+  console.log(button.classList) ;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "Dashboard/masquer_categorie.php?id=" + id, true);
+
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+     
+        // Toggle the button text between 'None' and 'Block'
+        const buttonText = button.querySelector('#result_' + id);
+       
+        if (buttonText.innerHTML === 'None') {
+        
+          buttonText.innerHTML = 'Block';
+          button.classList.remove('btn-info');
+          button.classList.add('btn-secondary');
+        } else {
+          buttonText.innerHTML = 'None';
+          button.classList.remove('btn-secondary');
+          button.classList.add('btn-info');
+        }
+     
+    } else {
+      console.error('Request failed');
+    }
+  };
+
+  xhr.onerror = function() {
+    console.error('Request failed');
+  };
+
+  xhr.send();
+}
+
+
+
+</script>
+
+<script>
     // JavaScript to handle modal trigger click event and set the modal target dynamically
     const modalTriggers = document.querySelectorAll('.modal-trigger');
     modalTriggers.forEach((trigger) => {
@@ -291,7 +343,9 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
             const modalTrigger = modal.querySelector('.modal-footer');
             // Use the fetched 'id' to perform further actions or data retrieval
             modalTrigger.innerHTML = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <a class="btn btn-primary" href="Dashboard/delete_categorie.php?id=${id}">delete</a>`;
+            
+            <a class="btn btn-success mb-2 ms-2" href="Dashboard/delete_categorie.php?id=<?= $value['id'] ?>">delete</a>
+`;
             body.innerHTML = `Do you want to delete : ${nom}`;
             // Set the 'data-bs-target' attribute of the modal dynamically
             modal.setAttribute('data-bs-target', `#exampleModal?id=${id}`);
@@ -300,6 +354,7 @@ $userData = $user_result->fetchAll(PDO::FETCH_ASSOC);
             myModal.show();
         });
     });
+
 </script>
 </body>
 </html>

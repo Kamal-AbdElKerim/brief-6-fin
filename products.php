@@ -1,5 +1,12 @@
-<?php
+
+<?php 
+
 include 'layout/coon.php';
+if ( !empty($_SESSION["user"]) || !empty($_SESSION["admin"])) {  ?>
+<?php
+
+
+
 $isActive = "products.php";
   
 ?>
@@ -58,31 +65,12 @@ $isActive = "products.php";
     
   <div class="col-lg-12">
               
-     <h5>Composants</h5>
+     <h5>Catégories</h5>
     <!-- Checkbox inputs -->
-    <ul class="list-group">
-    <li class="list-group-item">
-    <input id="firstCheckboxStretched" class="form-check-input me-1 min" type="checkbox" value="2" name="categories[]" >
-    <label class="form-check-label stretched-link o1 small-text" for="firstCheckboxStretched">Processeurs</label>
-    </li> 
-    <li class="list-group-item">
-    <input id="secondCheckboxStretched" class="form-check-input me-1 min"  type="checkbox" value="3" name="categories[]">
-    <label class="form-check-label stretched-link o2 small-text" for="secondCheckboxStretched">Cartes graphiques</label>
-    </li>
-    
-    
-    <li class="list-group-item">
-    <input  id="thirdCheckboxStretched" class="form-check-input me-1 min"  type="checkbox" value="1" name="categories[]"  >
-    <label class="form-check-label stretched-link small-text" for="thirdCheckboxStretched">Boitiers PC</label>
-    </li>
-   <br>
-    <h5>Quantité min</h5>
-    <ul  class="list-group">
-    <li class="list-group-item">
-    <input  id="thirdCheckboxStretched2" class="form-check-input me-1 min"  type="checkbox" value="4" name="quantite_min"  >
-    <label class="form-check-label stretched-link small-text" for="thirdCheckboxStretched2">Quantite min</label>
-    </li>
-    </ul>
+    <ul class="list-group" id="data_Catégories">
+     
+
+
     </ul>
     <br>
 
@@ -95,33 +83,13 @@ $isActive = "products.php";
 </form>
                 </div>
                 </div>
-                <div class="item3 row " >
+                <div class="item3 row " id="data" >
                
              
-            
-                    <div class="col-lg-6">
-                    <div class="item">
-                    <div class="row g-0  mb-4 position-relative" style="    border-bottom: 2px #857979 solid;border-top: 2px #857979 solid;border-radius: 20%;">
-                        <div class="col-md-6 mb-md-0 p-md-4">
-                            <img src="" class="w-100" alt="...">
-                        </div>
-                        <div class="col-md-6 p-4 ps-md-0">
-                            <h5 class="mb-4"></h5>
-                            <h6 class="text-primary"> MAD</h6>
-                            <h6 class="text-success">Produit en stock () </h6>
-                               
-                           
-                            <h6 class="text-danger">Quantite min :  </h6>
+                <!-- card -->
 
-                        
-                                <h6 class="text-subtle">Quantite min :  </h6>
 
-                            
-
-                        </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- end card -->
 
                     
                
@@ -155,7 +123,38 @@ $isActive = "products.php";
 
 <?php include 'layout/js.php' ; ?>
 
+<script>
+  // Function to perform XHR request and update the table
+  function fetchDataAndUpdateTable(url, tableId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
 
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        document.getElementById(tableId).innerHTML = xhr.responseText;
+    
+
+       
+      } else {
+        console.error('Request failed with status ' + xhr.status);
+      }
+    };
+
+    xhr.onerror = function() {
+      console.error('Request failed');
+    };
+
+    xhr.send();
+  }
+  
+
+  // Fetch data for admins and update the table
+  fetchDataAndUpdateTable("products_select.php", "data");
+  fetchDataAndUpdateTable("Catégories_select.php", "data_Catégories");
+
+
+  
+</script>
 
 
 
@@ -164,3 +163,5 @@ $isActive = "products.php";
   </body>
 
 </html>
+
+<?php }  ?>
