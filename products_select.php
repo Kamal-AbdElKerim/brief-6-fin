@@ -1,43 +1,43 @@
-<?php 
-
+<?php
+// Include file for database connection
 include 'layout/coon.php';
 
-$produit_result = $conn->query("SELECT * FROM `produit` WHERE deleted_at IS NULL");
-$produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT * FROM `produit` WHERE deleted_at IS NULL";
 
 
+if (isset( $_GET["selectedValue"])) {
+    $selectedValue = $_GET["selectedValue"];
+
+    // Perform filtering based on the selected value (you need to modify this logic)
+    switch ($selectedValue) {
+        case '1':
+            // Filter logic for value 1 (Quantité, croissant)
+            $sql .= " ORDER BY QuantiteStock ASC"; // Change "quantity_column" to the appropriate column name
+            break;
+        case '2':
+            // Filter logic for value 2 (Quantité, décroissant)
+            $sql .= " ORDER BY QuantiteStock DESC"; // Change "quantity_column" to the appropriate column name
+            break;
+        case '3':
+            // Filter logic for value 3 (Prix, croissant)
+            $sql .= " ORDER BY PrixFinal ASC"; // Change "price_column" to the appropriate column name
+            break;
+        case '4':
+            // Filter logic for value 4 (Prix, décroissant)
+            $sql .= " ORDER BY PrixFinal DESC"; // Change "price_column" to the appropriate column name
+            break;
+        default:
+            // Handle other cases or set a default sorting
+            break;
+    }
+}
 
 
-foreach ($produitData as $value) {
-   
+    // If "id" parameter is not set or empty, fetch all data without filtering
+    $produit_result = $conn->query($sql);
+    $produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
 
-    ?>
+    // Send all data back as JSON to the client
+    echo json_encode($produitData);
 
-
-<div class="col-lg-6">
-                    <div class="item ">
-                    <div class="row g-0  mb-4 position-relative" style="    border-bottom: 2px #857979 solid;border-top: 2px #857979 solid;border-radius: 20%;">
-                        <div class="col-md-6 mb-md-0 p-md-4">
-                            <img src="<?= $value["img"] ?>" class="w-100" alt="..." width="150px" height="150px">
-                        </div>
-                        <div class="col-md-6 p-4 ps-md-0">
-                            <h5 class="mb-4"></h5>
-                            <h3 class="text-subtle"><?= $value["Etiquette"] ?> </h3>
-                            <h6 class="text-primary"><?= $value["PrixFinal"] ?> MAD</h6>
-                            <h6 class="text-success">Produit en stock (<?= $value["QuantiteStock"] ?>) </h6>
-                               
-                           
-                            <h6 class="text-danger">Quantite min : <?= $value["QuantiteStock"] ?> </h6>
-
-                        
-                               
-
-                            
-
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
-
-<?php } ?>
+?>

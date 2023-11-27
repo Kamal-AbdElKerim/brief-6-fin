@@ -47,11 +47,11 @@ $isActive = "products.php";
 
             <div class="item1 d-flex justify-content-end align-items-center">
                 <span> Trier par : <span class="invisible">l</span> </span>
-                <select id="mySelect" name="quantity" class="form-select w-25 " aria-label="Default select example" style="width:17% !important;">
+                <select onchange="handleSelectionChange()" id="mySelect" name="quantity" class="form-select w-25 " aria-label="Default select example" style="width:17% !important;">
                        
-                        <option    value="0">All</option>
-                        <option    value="2">Quantité, croissant </option>
-                        <option    value="1">Quantité, décroissant </option>
+                        <option selected   value="0">All</option>
+                        <option    value="1">Quantité, croissant </option>
+                        <option    value="2">Quantité, décroissant </option>
                         <option    value="3">Prix, croissant </option>
                         <option    value="4">Prix, décroissant </option>
 
@@ -67,7 +67,8 @@ $isActive = "products.php";
               
      <h5>Catégories</h5>
     <!-- Checkbox inputs -->
-    <ul class="list-group" id="data_Catégories">
+    <ul class="list-group" id="data_Catégories"  style=" width: 250px;  word-wrap: break-word;  white-space: normal;">
+ 
      
 
 
@@ -95,7 +96,7 @@ $isActive = "products.php";
                
             
 
-       
+               
 
 
                    
@@ -123,38 +124,20 @@ $isActive = "products.php";
 
 <?php include 'layout/js.php' ; ?>
 
-<script>
-  // Function to perform XHR request and update the table
-  function fetchDataAndUpdateTable(url, tableId) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-
-    xhr.onload = function() {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        document.getElementById(tableId).innerHTML = xhr.responseText;
-    
-
-       
-      } else {
-        console.error('Request failed with status ' + xhr.status);
-      }
-    };
-
-    xhr.onerror = function() {
-      console.error('Request failed');
-    };
-
-    xhr.send();
-  }
-  
-
-  // Fetch data for admins and update the table
-  fetchDataAndUpdateTable("products_select.php", "data");
-  fetchDataAndUpdateTable("Catégories_select.php", "data_Catégories");
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
 
 
-  
-</script>
+
+
+
+
+
+
+
+
+
+
 
 
 

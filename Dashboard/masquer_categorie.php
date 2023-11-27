@@ -12,10 +12,16 @@
          // Update the 'deleted_at' field with the current timestamp
          $stmt = $conn->prepare("UPDATE `categorie` SET `deleted_at` = ? WHERE id = ?");
          $stmt->execute([$timee, $id]);
+
+         $stmt = $conn->prepare("UPDATE `produit` SET `deleted_at` = ? WHERE CategorieID = ?");
+         $stmt->execute([$timee, $id]);
+
      } else {
          // Set the 'deleted_at' field to NULL 
          $stmt = $conn->prepare("UPDATE `categorie` SET `deleted_at` = NULL WHERE id = ?");
          $stmt->execute([$id]);
+         $stmt = $conn->prepare("UPDATE `produit` SET `deleted_at` = NULL WHERE CategorieID = ?");
+         $stmt->execute([ $id]);
          
      }
  }

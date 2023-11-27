@@ -344,7 +344,7 @@ function NoneRequest(id, button) {
             // Use the fetched 'id' to perform further actions or data retrieval
             modalTrigger.innerHTML = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             
-            <a class="btn btn-success mb-2 ms-2" href="Dashboard/delete_categorie.php?id=<?= $value['id'] ?>">delete</a>
+            <a class="btn btn-success mb-2 ms-2" href="Dashboard/delete_categorie.php?id=${id}">delete</a>
 `;
             body.innerHTML = `Do you want to delete : ${nom}`;
             // Set the 'data-bs-target' attribute of the modal dynamically

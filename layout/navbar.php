@@ -32,14 +32,13 @@
 
 <li class="nav-item me-4"><a class="nav-link " href="dashboard_Categories.php" >Settings</a></li>
 <form action="index.php" method="post">
-          <li class="nav-item me-4">  <button name="sing_out" class="nav-link ">sing out</button> </li>
       
 
            </form>
 
 <?php } ?>
 
-<?php if ( !empty($_SESSION["user"])) {  ?>
+<?php if ( !empty($_SESSION["user"]) ||  !empty($_SESSION["admin"])) {  ?>
   <form action="index.php" method="post">
     
           <li class="nav-item me-4">  <button name="sing_out" class="nav-link ">sing out</button> </li>
