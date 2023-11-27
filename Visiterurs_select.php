@@ -3,7 +3,7 @@
 <?php 
 include 'layout/coon.php';
 
-$Users_result = $conn->query("SELECT * FROM `users` WHERE is_Active = 0");
+$Users_result = $conn->query("SELECT * FROM `users` WHERE is_Active = 0 ORDER BY id DESC");
 $UsersData = $Users_result->fetchAll(PDO::FETCH_ASSOC);
 $num = count($UsersData);
 

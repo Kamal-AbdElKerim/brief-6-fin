@@ -230,7 +230,7 @@ body{
                     
                  
                     <tr>
-                    <td ><img src="<?= $value['img'] ?>" alt="" width="200px" height="100px"></td>
+                    <td ><img src="<?= $value['img'] ?>" alt="" width="150px" height="154px"></td>
                     <th  scope="row"><?= $value['Nom'] ?></th>
                     <td ><?= $value['Description'] ?></td>
                   

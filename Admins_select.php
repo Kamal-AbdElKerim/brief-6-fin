@@ -3,7 +3,7 @@
 <?php 
 include 'layout/coon.php';
 
-$Admins_result = $conn->query("SELECT * FROM `admin` ORDER BY id DESC ");
+$Admins_result = $conn->query("SELECT * FROM `admin` ORDER BY id ASC ");
 $AdminData = $Admins_result->fetchAll(PDO::FETCH_ASSOC);
 $num = count($AdminData);
 
@@ -31,8 +31,21 @@ $num = count($AdminData);
                    
                 
                   foreach ($AdminData as  $value) {
-                    # code...
-                 ?>
+                   if ( $value["super_admin"] === 1) { ?>
+                     <tr>
+                    <th  scope="row"><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
+                    <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Password"] ?></div></td>
+                    
+                    <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;">SUPER Admin
+
+                    </div>
+
+                    </td>
+                    </tr>
+                  
+          <?php    }else {      ?>
+            
+       
                     <tr>
                     <th  scope="row"><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
                     <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Password"] ?></div></td>
@@ -44,7 +57,8 @@ $num = count($AdminData);
 
                     </td>
                     </tr>
-                    <?php    }   }?>
+                    <?php    }   ?>
+                    <?php    } }  ?>
 
 
                      

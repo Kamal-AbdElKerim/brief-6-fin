@@ -46,7 +46,7 @@ if (isset($_POST["submit"])) {
     $error_file = "Invalid file upload. Please select an image.";
     $color = "danger";
   }
-  if (!empty($etiquette) && !empty($code)  && !empty($description)  && !empty($prixAchat)  && !empty($prixFinal)   ) {
+  if (!empty($etiquette) && !empty($code)  && !empty($description)  && !empty($prixAchat)  && !empty($offreDePrix) && !empty($prixFinal) && !empty($quantiteMin) && !empty($quantiteStock) && $categories !== "null"   ) {
 
     if (!empty($uploadedFile)) {
       $stmt = $conn->prepare("INSERT INTO `produit`( `Etiquette`, `Code à barres`, `Description`, `PrixAchat`, `img` , `PrixFinal`, `OffreDePrix`, `QuantiteMin`, `QuantiteStock`, `CategorieID`) VALUES ('$etiquette','$code','$description','$prixAchat','$uploadedFile','$prixFinal','$offreDePrix','$quantiteMin','$quantiteStock','$categories')");
@@ -63,7 +63,6 @@ if (isset($_POST["submit"])) {
       $quantiteMin = "";
       $quantiteStock = "";
       $code = "";
-      $code = "";
   
 
     }
@@ -73,7 +72,7 @@ if (isset($_POST["submit"])) {
  
 
   }else {
-    $error_input = "Nom and Description are required.";
+    $error_input = "All input are required.";
     $color = "danger";
   }   
 }
@@ -217,8 +216,8 @@ $produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
               </div>
               <div class="col-lg-3 mb-4">
               <label for="exampleFormControlTextarea1" class="form-label">Categories</label>
-              <select class="form-select" name="Categories" aria-label="Default select example">
-                <option selected>Choose Categories</option>
+              <select class="form-select" name="Categories" aria-label="Default select example" required>
+                <option value="null" selected>Choose Categories</option>
                 <?php foreach ($categorieData as  $value) {    ;?>
 
                 <option value="<?= $value["id"] ?>"><?= $value["Nom"] ?></option>
@@ -287,7 +286,7 @@ $produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
 
                    
                     <tr>
-                    <td ><img src="<?= $value['img'] ?>" alt="" width="200px" height="100px"></td>
+                    <td ><img src="<?= $value['img'] ?>" alt="" width="150px" height="154px"></td>
                     <th  scope="row"><?= $value['Etiquette'] ?></th>
                     <td ><?= $value['PrixFinal'] ?></td>
                     <td ><?= $value['QuantiteMin'] ?></td>
