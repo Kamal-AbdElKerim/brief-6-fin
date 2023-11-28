@@ -43,14 +43,15 @@ htmlString += `
             <div class="item ">
             <div class="row g-0  mb-4 position-relative" style="    border-bottom: 2px #857979 solid;border-top: 2px #857979 solid;border-radius: 20%;">
                 <div class="col-md-6 mb-md-0 p-md-4">
-                    <img src="${element["img"]}" class="w-100" alt="..." width="190px" height="150px">
+                    <img src="${element["img"]}" class="w-100" alt="..." width="170px" height="190px">
                 </div>
                 <div class="col-md-6 p-4 ps-md-0">
                     <h5 class="mb-4"></h5>
                     <h3 class="text-subtle">${element["Etiquette"]} </h3>
                     <h6 class="text-primary">${element["PrixFinal"]} MAD</h6>
-                    <h6 class="text-success">Produit en stock (${element["QuantiteMin"]}) </h6>
-                    <h6 class="text-danger">Quantite min : ${element["PrixFinal"]} </h6>
+                    <h6 class="text-success">Produit en stock (${element["QuantiteStock"]}) </h6>
+
+                    <h6 class="text-danger">Quantite min : ${element["QuantiteMin"]} </h6>
 
                 </div>
                 </div>

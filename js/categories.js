@@ -20,11 +20,16 @@ let htmlString = '';
 // Iterate through the data array and build the HTML string
 data.forEach(element => {
 htmlString += `
-    <li class="list-group-item">
-        <input id="checkbox${element["id"]}" class="form-check-input me-1 min " type="checkbox" value="${element["id"]}">
-        <label style="width: 192px;" class="form-check-label" for="checkbox${element["id"]}">${element["Nom"]}</label>
-    </li>
+<li class="category-container"  >
+  <label for="checkbox${element["id"]}">
+    <input id="checkbox${element["id"]}" class="form-check-input me-1 min category  big-checkbox" type="checkbox" value="${element["id"]}" >
+    <img src="${element["img"]}" alt="..." width="120px" height="130px">
+    <span style="width: 192px;" class="form-check-label">${element["Nom"]}</span>
+  </label>
+</li>
+
 `;
+
 
 });
 
@@ -39,6 +44,9 @@ checkboxes.forEach(checkbox => {
       fetchDataAndUpdateTable();
   });
 });
+// Get all elements with the class 'category'
+
+
 
 
 
@@ -58,3 +66,5 @@ xhr.onerror = function() {
 };
 
 xhr.send();
+
+

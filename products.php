@@ -16,7 +16,67 @@ $isActive = "products.php";
 <!DOCTYPE html>
 <html lang="en">
 
-     <?php    include 'layout/head.php'; ?>
+     <head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+<title>Pc Gamer</title>
+
+
+<!-- Additional CSS Files -->
+
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+
+<link rel="stylesheet" href="assets/css/hexashop.css">
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<style>
+  /* Custom CSS for the borderless checkbox */
+  .form-check-input.big-checkbox {
+    width: 0px; /* Set the width */
+    height: 0px; /* Set the height */
+    background: none;
+
+    appearance: none; /* Remove default appearance for other browsers */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    vertical-align: middle; /* Align vertically */
+    position: relative;
+    left: 55px;
+    cursor: pointer; /* Show cursor on hover */
+    border-radius: 0; /* Optional: Remove border-radius */
+    pointer-events: none;
+  }
+
+
+
+  /* Hide the default checkbox checkmark */
+  .form-check-input.big-checkbox::before {
+    content: ''; /* Empty content */
+    display: block;
+    width: 60px; /* Adjust the size of the checkmark */
+    height: 60px; /* Adjust the size of the checkmark */
+    cursor: pointer;
+    transform: translate(8%, -50%);
+    background-image: url('chekk.png'); /* Optional: Use a custom checkmark image */
+    background-size: cover; /* Ensure the checkmark image covers the area */
+    background-repeat: no-repeat; /* Prevent checkmark image repetition */
+    visibility: visible; /* Show the checkmark */
+  }
+
+  /* Hide the checkmark when the checkbox is unchecked */
+  .form-check-input.big-checkbox:not(:checked)::before {
+    visibility: hidden;
+  }
+</style>
+</head>
 
     <body>
 
@@ -67,7 +127,7 @@ $isActive = "products.php";
               
      <h5>Catégories</h5>
     <!-- Checkbox inputs -->
-    <ul class="list-group" id="data_Catégories"  style=" width: 250px;  word-wrap: break-word;  white-space: normal;">
+    <ul class="list-group " id="data_Catégories"  style="   word-wrap: break-word;  white-space: normal;">
  
      
 
@@ -84,25 +144,11 @@ $isActive = "products.php";
 </form>
                 </div>
                 </div>
+                   <!-- card -->
                 <div class="item3 row " id="data" >
-               
-             
-                <!-- card -->
 
-
-                <!-- end card -->
-
-                    
-               
-            
-
-               
-
-
-                   
-                  
-             
             </div>  
+             <!-- end card -->
 
                 </div>
                         

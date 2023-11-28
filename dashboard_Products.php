@@ -265,7 +265,11 @@ $produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                     <th  scope="col">photo</th>
                     <th  scope="col">Etiquette</th>
+                    <th  scope="col">Description</th>
+                    <th  scope="col">Code à barres</th>
+                    <th  scope="col">PrixAchat</th>
                     <th  scope="col">PrixFinal</th>
+                    <th  scope="col">OffreDePrix</th>
                     <th  scope="col">QuantiteMin</th>
                     <th  scope="col">QuantiteStock</th>
                     <th  scope="col">Categories</th>
@@ -288,7 +292,11 @@ $produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                     <td ><img src="<?= $value['img'] ?>" alt="" width="150px" height="154px"></td>
                     <th  scope="row"><?= $value['Etiquette'] ?></th>
+                    <th  scope="row"><?= $value['Description'] ?></th>
+                    <th  scope="row"><?= $value['Code à barres'] ?></th>
+                    <td ><?= $value['PrixAchat'] ?></td>
                     <td ><?= $value['PrixFinal'] ?></td>
+                    <td ><?= $value['OffreDePrix'] ?></td>
                     <td ><?= $value['QuantiteMin'] ?></td>
                     <td ><?= $value['QuantiteStock'] ?></td>
                     <td ><?= $categorie['Nom'] ?></td>
