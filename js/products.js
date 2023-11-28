@@ -1,94 +1,83 @@
 
 
+const limit = 5;
+let filteredProducts = []; // Initialize as an empty array to avoid 'undefined' errors
 
+function paginateFun(number_page) {
+  const tableElement = document.getElementById("data");
 
+  tableElement.innerHTML = "";
 
-// Function to perform XHR request and update the table
+  const start = (number_page - 1) * limit;
+  const end = number_page * limit;
+
+  const paginate_items = filteredProducts.slice(start, end).map((elem) => {
+    return `<div class="col-lg-6">
+      <div class="item">
+        <div class="row g-0 mb-4 position-relative" style="border-bottom: 2px #857979 solid;border-top: 2px #857979 solid;border-radius: 20%;">
+          <div class="col-md-6 mb-md-0 p-md-4">
+            <img src="${elem["img"]}" class="w-100" alt="..." width="170px" height="190px">
+          </div>
+          <div class="col-md-6 p-4 ps-md-0">
+            <h5 class="mb-4"></h5>
+            <h3 class="text-subtle">${elem["Etiquette"]} </h3>
+            <h6 class="text-primary">${elem["PrixFinal"]} MAD</h6>
+            <h6 class="text-success">Produit en stock (${elem["QuantiteStock"]}) </h6>
+            <h6 class="text-danger">Quantite min : ${elem["QuantiteMin"]} </h6>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  tableElement.innerHTML = paginate_items.join("");
+
+  const buttons = [...Array(Math.ceil(filteredProducts.length / limit)).keys()].map((elem) => {
+    return `<li class="page-item">
+      <button class="page-link" onclick="paginateFun(${elem + 1})">${elem + 1}</button>
+    </li>`;
+  });
+
+  document.getElementById("paginate").innerHTML = buttons.join("");
+}
 
 function fetchDataAndUpdateTable(selectedValue) {
-var xhr = new XMLHttpRequest();
-xhr.open('GET', "products_select.php?selectedValue=" + selectedValue, true);
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "products_select.php?selectedValue=" + selectedValue, true);
 
-xhr.onload = function() {
-  if (xhr.status >= 200 && xhr.status < 300) {
-    const data = JSON.parse(xhr.responseText);
- 
-    const tableElement = document.getElementById("data");
+  xhr.onload = function () {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      const data = JSON.parse(xhr.responseText);
 
-// Create an HTML string to store the checkbox list
-let htmlString = '';
+      // Update filteredProducts with fetched data
+      filteredProducts = data;
 
-// console.log(selectedValues);
+      if (selectedValues.length > 0) {
+        const selectedValuesIds = selectedValues.map(id => parseInt(id));
+        
+        filteredProducts = data.filter(product => {
+        return selectedValuesIds.includes(product.CategorieID);
+        });
+        }
 
-let filteredProducts = data; // Default to all products if selectedValues is empty
+      paginateFun(1); // Call paginateFun after fetching data
+    } else {
+      console.error('Request failed with status ' + xhr.status);
+    }
+  };
 
-if (selectedValues.length > 0) {
-const selectedValuesIds = selectedValues.map(id => parseInt(id));
+  xhr.onerror = function () {
+    console.error('Request failed');
+  };
 
-filteredProducts = data.filter(product => {
-return selectedValuesIds.includes(product.CategorieID);
-});
+  xhr.send();
 }
 
-
-
-
-
-
-// Iterate through the data array and build the HTML string
-filteredProducts.forEach(element => {
-htmlString += `
-  
-            <div class="col-lg-6">
-            <div class="item ">
-            <div class="row g-0  mb-4 position-relative" style="    border-bottom: 2px #857979 solid;border-top: 2px #857979 solid;border-radius: 20%;">
-                <div class="col-md-6 mb-md-0 p-md-4">
-                    <img src="${element["img"]}" class="w-100" alt="..." width="170px" height="190px">
-                </div>
-                <div class="col-md-6 p-4 ps-md-0">
-                    <h5 class="mb-4"></h5>
-                    <h3 class="text-subtle">${element["Etiquette"]} </h3>
-                    <h6 class="text-primary">${element["PrixFinal"]} MAD</h6>
-                    <h6 class="text-success">Produit en stock (${element["QuantiteStock"]}) </h6>
-
-                    <h6 class="text-danger">Quantite min : ${element["QuantiteMin"]} </h6>
-
-                </div>
-                </div>
-            </div>
-            </div>
-`;
-});
-
-// Set the inner HTML of the table element with the generated HTML string
-tableElement.innerHTML = htmlString;
-  
-    
-
-   
-  } else {
-    console.error('Request failed with status ' + xhr.status);
-  }
-};
-
-xhr.onerror = function() {
-  console.error('Request failed');
-};
-
-xhr.send();
-}
-
-fetchDataAndUpdateTable();
-
-
+// Call fetchDataAndUpdateTable to initially fetch and display data
+fetchDataAndUpdateTable('');
 
 function handleSelectionChange() {
-  // Get the select element
   var selectElement = document.getElementById('mySelect');
-  
-  // Get the selected value
   var selectedValue = selectElement.value;
-
-  // Call the function to fetch and update the table based on the selected sorting criteria
   fetchDataAndUpdateTable(selectedValue);
 }
