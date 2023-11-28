@@ -1,6 +1,6 @@
 
 
-const limit = 5;
+const limit = 2;
 let filteredProducts = []; // Initialize as an empty array to avoid 'undefined' errors
 
 function paginateFun(number_page) {
@@ -34,11 +34,21 @@ function paginateFun(number_page) {
 
   const buttons = [...Array(Math.ceil(filteredProducts.length / limit)).keys()].map((elem) => {
     return `<li class="page-item">
-      <button class="page-link" onclick="paginateFun(${elem + 1})">${elem + 1}</button>
+      <button class="page-link" data-page="${elem + 1}" onclick="paginateFun(${elem + 1})">${elem + 1}</button>
     </li>`;
   });
 
   document.getElementById("paginate").innerHTML = buttons.join("");
+
+  const buttone = document.querySelectorAll('.page-link');
+  buttone.forEach(button => {
+    button.classList.remove('active');
+  });
+
+  const activeButton = document.querySelector(`.page-link[data-page="${number_page}"]`);
+  if (activeButton) {
+    activeButton.classList.add('active');
+  }
 }
 
 function fetchDataAndUpdateTable(selectedValue) {

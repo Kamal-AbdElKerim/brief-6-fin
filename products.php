@@ -80,6 +80,11 @@ $isActive = "products.php";
   .form-check-input.big-checkbox:not(:checked)::before {
     visibility: hidden;
   }
+  .active-page {
+  background-color: #007bff;
+  color: #fff;
+  /* Add any other styles for the active state */
+}
 </style>
 </head>
 
@@ -153,10 +158,21 @@ $isActive = "products.php";
                 <div class="item3 row " id="data" >
 
             </div>  
+                <div class="item5  " >
+                <nav aria-label="..." class=" d-flex  justify-content-center  w-100 ">
+  <ul class="pagination " id="paginate">
+ 
+   
+  </ul>
+</nav>
+            </div>  
              <!-- end card -->
 
+
+
                 </div>
-                <ul id="paginate"></ul>
+             
+
 
                         </div>
     </section>
