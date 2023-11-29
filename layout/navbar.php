@@ -30,7 +30,7 @@
           <?php } ?>
           <?php if ( !empty($_SESSION["admin"])) {  ?>
 
-<li class="nav-item me-4"><a class="nav-link " href="dashboard_Categories.php" >Settings</a></li>
+<li class="nav-item me-4"><a class="nav-link " href="Home.php" >Settings</a></li>
 <form action="index.php" method="post">
       
 

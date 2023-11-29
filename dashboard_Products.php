@@ -163,6 +163,8 @@ $produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
         <div class="row">
         <div class="col-sm-12 bg-black p-4 " >
          
+        <a class="mb-5 chose"  href="Home.php">Home</a>
+
          <a class="mb-5 chose"  href="dashboard_Categories.php">Ajouter Catégories</a>
        
         

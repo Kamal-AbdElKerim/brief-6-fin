@@ -100,7 +100,12 @@ body{
    
 }
 
+.alert{
+  border: none !important;
+  --bs-alert-border-radius: n;
+  border-radius: 40px 0px;
 
+}
 </style>
 </head>
 <body>
@@ -112,6 +117,8 @@ body{
   <div class=" text-center ">
         <div class="row">
           <div class="col-sm-12 bg-black p-4 " >
+
+          <a class="mb-5 chose"  href="Home.php">Home</a>
          
           <a class="mb-5 chose"  href="dashboard_Categories.php">Ajouter Catégories</a>
         

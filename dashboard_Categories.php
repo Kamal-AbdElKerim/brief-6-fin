@@ -162,6 +162,8 @@ body{
   <div class=" text-center ">
         <div class="row">
         <div class="col-sm-12 bg-black p-4 " >
+
+        <a class="mb-5 chose"  href="Home.php">Home</a>
          
          <a class="mb-5 chose active"  href="dashboard_Categories.php">Ajouter Catégories</a>
        

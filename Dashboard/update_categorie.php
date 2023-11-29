@@ -243,7 +243,7 @@
               <label class="mb-2" for="">add img</label>
              <div class="row g-0 text-center  ms-1">
            <div class=" col-xl-6">  <label class="label_file col-sm-4" for="apply"><input type="file"  name="image" id="apply" accept="image/*">Get file</label></div>
-           <div class=" col-xl-6 mt-4"> <img src="../<?= $userData["img"] ?>" alt="" width="400px" height="200px" >  </div>
+           <div class=" col-xl-6 mt-4"> <img src="../<?= $userData["img"] ?>" alt="" width="180px" height="190px" >  </div>
              </div>
              <?php if (isset($error_file , $_POST['submit'])  ) { ?>
                         <div class="alert alert-<?= $color ?> mt-4" role="alert">

@@ -35,7 +35,7 @@ $userData = $user_result->fetch();
 
 if (!empty($AdminData)) {
   
-    header("Location: dashboard_Categories.php");
+    header("Location: Home.php");
     $_SESSION["admin"] = $AdminData["Email"];
     exit();
 } else {
@@ -137,6 +137,8 @@ $error_message = "Email and password are required.";
   <div class="row gy-3">
     <div class=" col-sm-6 ">
       <div class="p-3">
+
+      
       <form  method="post"  >
         <h4>Log in :</h4>
                         <div class="col-12">
@@ -179,29 +181,7 @@ $error_message = "Email and password are required.";
 
    <?php include 'layout/js.php' ; ?>
 
-   <script>
-  function login() {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', "login.php" , true);
 
-  xhr.onload = function() {
-    if (xhr.status >= 200 && xhr.status < 300) {
-     
-      document.getElementById("myform").innerHTML = xhr.responseText;
-
-     
-    } else {
-      console.error('Request failed');
-    }
-  };
-
-  xhr.onerror = function() {
-    console.error('Request failed');
-  };
-
-  xhr.send();
-}
-</script>
 
   </body>
 </html>

@@ -1,6 +1,6 @@
 
 
-const limit = 2;
+const limit = 6;
 let filteredProducts = []; // Initialize as an empty array to avoid 'undefined' errors
 
 function paginateFun(number_page) {
@@ -20,7 +20,7 @@ function paginateFun(number_page) {
           </div>
           <div class="col-md-6 p-4 ps-md-0">
             <h5 class="mb-4"></h5>
-            <h3 class="text-subtle">${elem["Etiquette"]} </h3>
+            <h4 class="text-subtle">${elem["Etiquette"]} </h4>
             <h6 class="text-primary">${elem["PrixFinal"]} MAD</h6>
             <h6 class="text-success">Produit en stock (${elem["QuantiteStock"]}) </h6>
             <h6 class="text-danger">Quantite min : ${elem["QuantiteMin"]} </h6>

@@ -2,6 +2,39 @@
 include 'layout/coon.php';
 
 
+$Admins_result = $conn->query("SELECT * FROM `admin` ORDER BY id ASC ");
+$AdminData = $Admins_result->fetchAll(PDO::FETCH_ASSOC);
+$num = count($AdminData);
+
+$numAdminData = ($num / 100) * 100;
+
+
+
+$user_result = $conn->query("SELECT * FROM `categorie`");
+$categorieData = $user_result->fetchAll(PDO::FETCH_ASSOC);
+$num = count($categorieData);
+
+$numcategorie = ($num / 100) * 100;
+
+
+$produit_result = $conn->query("SELECT * FROM `produit`");
+$produitData = $produit_result->fetchAll(PDO::FETCH_ASSOC);
+$num = count($produitData);
+
+$numproduit = ($num / 100) * 100;
+
+$Users_result = $conn->query("SELECT * FROM `users` WHERE is_Active = 1 ORDER BY id DESC");
+$UsersData = $Users_result->fetchAll(PDO::FETCH_ASSOC);
+$num = count($UsersData);
+
+$numUsersData = ($num / 100) * 100;
+
+$Users_result = $conn->query("SELECT * FROM `users` WHERE is_Active = 0 ORDER BY id DESC");
+$UsersData = $Users_result->fetchAll(PDO::FETCH_ASSOC);
+$num = count($UsersData);
+
+$numDataData = ($num / 100) * 100;
+
 
 ?>
 
@@ -67,39 +100,110 @@ body{
   background-color: #495057;
 
 }
-.label_file {
-	display: block;
-	width: 60vw;
-	max-width: 300px;
- 
-
-	background-color: slateblue;
-	border-radius: 2px;
-	font-size: 1em;
-	line-height: 2.5em;
-	text-align: center;
+.progress-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 20px
 }
 
-.label_file:hover {
-	background-color: cornflowerblue;
+.progress {
+    height: 20px;
+    background: #333;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 30px;
+    overflow: visible
 }
 
-.label_file:active {
-	background-color: mediumaquamarine;
+.progress .progress-bar {
+    position: relative;
+    -webkit-animation: animate-positive 2s;
+    animation: animate-positive 2s
 }
 
-#apply {
-	border: 0;
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px; 
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
+.progress .progress-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ee9191;
     position: absolute;
-    width: 1px;
-   
+    top: -37px;
+    right: 9px
 }
 
+.progress .progress-bar:after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    background: #fff;
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    right: -5px;
+    z-index: 1;
+    transform: rotate(35deg)
+}
+
+
+
+
+
+.progress-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 2px;
+    margin: 0 0 15px;
+}
+.progress{
+    height: 26px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 40px;
+    overflow: visible;
+    position: relative;
+}
+.progress .progress-bar{
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
+    -webkit-animation: 2s linear 0s normal none infinite running progress-bar-stripes,animate-positive 1s;
+    animation: 2s linear 0s normal none infinite running progress-bar-stripes,animate-positive 1s;
+}
+.progress-bar .progress-value{
+    width: 50px;
+    height: 100%;
+    background: #000;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    position: absolute;
+    line-height: 27px;
+    top: 0;
+    left: 0;
+}
+.progress:after,
+.progress .progress-bar:after,
+.progress .progress-value:after{
+    content: "";
+
+    position: absolute;
+    top: 0;
+    right: -13px;
+}
+.progress.red .progress-bar:after{ border-left-color: #d9534f; }
+.progress .progress-value:after{ border-left: 13px solid #000; }
+.progress.blue .progress-bar:after{ border-left-color: #5bc0de; }
+.progress.yellow .progress-bar:after{ border-left-color: #f0ad4e; }
+.progress.green .progress-bar:after{ border-left-color: #5cb85c; }
+@-webkit-keyframes animate-positive{
+    0%{ width: 0; }
+}
+@keyframes animate-positive{
+    0%{ width: 0; }
+}
 
 </style>
 </head>
@@ -113,37 +217,90 @@ body{
         <div class="row">
           <div class="col-sm-12 bg-black p-4 " >
          
+          <a class="mb-5 chose active"  href="Home.php">Home</a>
+
           <a class="mb-5 chose"  href="dashboard_Categories.php">Ajouter Catégories</a>
         
           <a class="mb-5 chose"  href="dashboard_Products.php">Ajouter Produits</a>
         
-          <a class="mb-5 chose active"  href="dashboard_Admins.php">Liste des Admins</a>
+          <a class="mb-5 chose"  href="dashboard_Admins.php">Liste des Admins</a>
                  
         
           
           </div>
-          <div class="col-sm-12 " style=" min-height: 1000px;" >
+          <div class="col-sm-12 " style=" min-height: 800px;" >
             <div class="row container-fluid ">
-            <div id="shawdata" class=" col-sm-12  pt-4  text-light text-start table-responsive">
+              <h1 class="mt-5 ms-5 text-white  text-start ">Dashboard the Admin</h1>
+        
+            <div  class=" col-xl-6    text-light ">
 
-            <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar bg-success" style="width: 25%"></div>
-</div>
-<div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar bg-info" style="width: 50%"></div>
-</div>
-<div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar bg-warning" style="width: 75%"></div>
-</div>
-<div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-bar bg-danger" style="width: 100%"></div>
-</div>
+            <div class="container mt-5 ms-2">
+    <div class="row mt-12">
+        <div class="col-md-12 text-start ">
+            <h3 class="progress-title text-white ">Liste des Admins </h3>
+            <div class="progress red">
+            <div class="progress-value"><?= $numAdminData ?></div>
+                <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width:<?= $numAdminData ?>%;">
+                   
                 </div>
-              
+               
+            </div>
+            <h3 class="progress-title  text-white ">Liste des Utilisateurs</h3>
+            <div class="progress blue">
+            <div class="progress-value"><?= $numUsersData ?></div>
+                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:<?= $numUsersData ?>%;">
+                   
+                </div>
+            </div>
+            <h3 class="progress-title  text-white ">Liste des Visiterurs</h3>
+            <div class="progress blue">
+            <div class="progress-value"><?= $numDataData ?></div>
+                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:<?= $numDataData ?>%;">
+                   
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+                </div>
+                <div  class=" col-xl-6   text-light ">
+          
+                <div class="container mt-5 ms-2">
+    <div class="row mt-12">
+        <div class="col-md-12 text-start ">
+            <h3 class="progress-title text-white ">Liste des Catégories </h3>
+            <div class="progress red">
+            <div class="progress-value"><?= $numcategorie?></div>
+                <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width:<?= $numcategorie?>%;">
+                   
+                </div>
+            </div>
+            <h3 class="progress-title  text-white ">Liste des Produits</h3>
+            <div class="progress blue">
+            <div class="progress-value"><?= $numproduit?></div>
+                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:<?= $numproduit?>%;">
+                  
+                </div>
+            </div>
+            <h3 class="progress-title  text-white ">Liste des Admins</h3>
+            <div class="progress blue">
+            <div class="progress-value">87%</div>
+                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:50%;">
+                  
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+          </div>
 
                
           </div>
         </div>
+       
       </div>
       </div>
     
