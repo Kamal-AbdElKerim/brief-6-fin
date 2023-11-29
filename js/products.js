@@ -21,8 +21,8 @@ function paginateFun(number_page) {
           <div class="col-md-6 p-4 ps-md-0">
             <h5 class="mb-4"></h5>
             <h4 class="text-subtle">${elem["Etiquette"]} </h4>
-            <h6 class="text-secondary"><del>${elem["PrixFinal"]} MAD</del></h6>
-            <h5 class="text-primary">${elem["OffreDePrix"]} MAD</h5>
+            <h6 class="text-secondary"><del>${elem["PrixFinal"]}.00 MAD</del></h6>
+            <h5 class="text-primary">${elem["OffreDePrix"]}.00 MAD</h5>
             <h6 class="text-success">Produit en stock (${elem["QuantiteStock"]}) </h6>
             <h6 class="text-danger">Quantite min : ${elem["QuantiteMin"]} </h6>
           </div>

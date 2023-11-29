@@ -204,22 +204,8 @@ height: 250px !important;
 
 <div class=" text-center ">
 <div class="row">
-  <div class="col-sm-3 bg-black p-5 width" >
-  <div class="mb-5 chose">
-  <a   href="dashboard_Categories.php">Ajouter Catégories</a>
-  </div>
-  <div class="mb-5 chose">
-  <a class="active"  href="dashboard_Products.php">Ajouter Produits</a>
-  </div>
-  <div class="mb-5 chose">
-  <a  href="dashboard_Utilisateurs.php">Liste des Utilisateurs</a>
-  </div>
-  <div class="mb-5 chose">
-  <a  href="dashboard_Visiteurs.php">Liste des Visiteurs</a>  
-  </div>
-  
-  </div>
-  <div class="col-sm-9 form">
+
+  <div class="col-sm-12 form">
     <div class="row">
    
       <div class="col-12 col-sm-12  p-5 text-light text-start">

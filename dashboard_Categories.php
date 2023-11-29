@@ -238,6 +238,7 @@ body{
                   
                     <td >
                     <a class="btn btn-success mb-2 ms-2" href="Dashboard/update_categorie.php?id=<?= $value['id'] ?>">update</a>
+                   
 
                   
                    
