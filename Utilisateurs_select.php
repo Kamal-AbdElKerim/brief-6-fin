@@ -15,7 +15,7 @@ $num = count($UsersData);
                 <table class="table table-striped table-hover " >
                 <thead >
                 <tr >
-                    <th ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;">Email</div></th>
+                    <th ><div style=" width: 140px;  word-wrap: break-word;  white-space: normal;">Email</div></th>
                     <th ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;">Password</div></th>
                     <th ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;">Opérations</div></th>
                  
@@ -35,7 +35,7 @@ $num = count($UsersData);
                     # code...
                  ?>
                     <tr>
-                    <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></td>
+                    <th  scope="row"><div style=" width: 190px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
                     <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Password"] ?></div></td>
                     
                     <td ><div style=" width: 120px;  word-wrap: break-word;  white-space: normal;">

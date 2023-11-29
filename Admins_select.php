@@ -33,7 +33,7 @@ $num = count($AdminData);
                   foreach ($AdminData as  $value) {
                    if ( $value["super_admin"] === 1) { ?>
                      <tr>
-                    <th  scope="row"><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
+                     <th  scope="row"><div style=" width: 190px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
                     <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Password"] ?></div></td>
                     
                     <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;">SUPER Admin
@@ -47,7 +47,7 @@ $num = count($AdminData);
             
        
                     <tr>
-                    <th  scope="row"><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
+                    <th  scope="row"><div style=" width: 190px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
                     <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Password"] ?></div></td>
                     
                     <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;">

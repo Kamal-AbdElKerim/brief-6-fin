@@ -8,12 +8,17 @@ if (isset($_POST['sing_out'])) {
   
 }
 
-
+function sanitizeInput($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 
 if (isset($_POST['submit'])) {
   // Retrieve form data
-$email = $_POST['email'];
-$password = $_POST['password'];
+$email =sanitizeInput($_POST['email']) ;
+$password =sanitizeInput($_POST['password']) ;
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
  
@@ -143,11 +148,11 @@ $error_message = "Email and password are required.";
         <h4>Log in :</h4>
                         <div class="col-12">
                             <label for="inputEmail4" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control" id="inputEmail4">
+                            <input type="email" name="email" value="<?php echo (isset($email)) ? $email : ''; ?>" class="form-control" id="inputEmail4">
                           </div>
                       <div class="form-group mb-5 ">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control rounded-pill" id="exampleInputPassword1">
+                        <input type="password" name="password"  class="form-control rounded-pill" id="exampleInputPassword1">
                       </div>
                       <button  name="submit" type="submit" class="btn btn-primary mb-5">Submit</button>
                  

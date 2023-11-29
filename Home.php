@@ -234,28 +234,28 @@ body{
         
             <div  class=" col-xl-6    text-light ">
 
-            <div class="container mt-5 ms-2">
+            <div class="container mt-4 ms-2">
     <div class="row mt-12">
         <div class="col-md-12 text-start ">
-            <h3 class="progress-title text-white ">Liste des Admins </h3>
+            <h3 class="progress-title text-white "><a class="btn btn-outline-info p-2" href="dashboard_Admins.php">Liste des Admins</a></h3>
             <div class="progress red">
             <div class="progress-value"><?= $numAdminData ?></div>
-                <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width:<?= $numAdminData ?>%;">
+                <div class="progress-bar progress-bar-danger progress-bar-striped " style="width:<?= $numAdminData ?>%;">
                    
                 </div>
                
             </div>
-            <h3 class="progress-title  text-white ">Liste des Utilisateurs</h3>
+            <h3 class="progress-title  text-white "><a class="btn btn-outline-info p-2" href="dashboard_Admins.php">Liste des Utilisateurs</a></h3>
             <div class="progress blue">
             <div class="progress-value"><?= $numUsersData ?></div>
-                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:<?= $numUsersData ?>%;">
+                <div class="progress-bar progress-bar-info progress-bar-striped " style="width:<?= $numUsersData ?>%;">
                    
                 </div>
             </div>
-            <h3 class="progress-title  text-white ">Liste des Visiterurs</h3>
+            <h3 class="progress-title  text-white "><a class="btn btn-outline-info p-2" href="dashboard_Admins.php">Liste des Visiterurs</a></h3>
             <div class="progress blue">
             <div class="progress-value"><?= $numDataData ?></div>
-                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:<?= $numDataData ?>%;">
+                <div class="progress-bar progress-bar-info progress-bar-striped " style="width:<?= $numDataData ?>%;">
                    
                 </div>
             </div>
@@ -267,27 +267,27 @@ body{
                 </div>
                 <div  class=" col-xl-6   text-light ">
           
-                <div class="container mt-5 ms-2">
+                <div class="container mt-4 ms-2">
     <div class="row mt-12">
         <div class="col-md-12 text-start ">
-            <h3 class="progress-title text-white ">Liste des Catégories </h3>
+            <h3 class="progress-title  "><a class="btn btn-outline-info p-2" href="dashboard_Categories.php"  >Liste des Catégories </a></h3>
             <div class="progress red">
             <div class="progress-value"><?= $numcategorie?></div>
-                <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width:<?= $numcategorie?>%;">
+                <div class="progress-bar progress-bar-danger progress-bar-striped " style="width:<?= $numcategorie?>%;">
                    
                 </div>
             </div>
-            <h3 class="progress-title  text-white ">Liste des Produits</h3>
+            <h3 class="progress-title  text-white "><a class="btn btn-outline-info p-2" href="dashboard_Products.php">Liste des Produits</a></h3>
             <div class="progress blue">
             <div class="progress-value"><?= $numproduit?></div>
-                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:<?= $numproduit?>%;">
+                <div class="progress-bar progress-bar-info progress-bar-striped " style="width:<?= $numproduit?>%;">
                   
                 </div>
             </div>
-            <h3 class="progress-title  text-white ">Liste des Admins</h3>
+            <h3 class="progress-title  text-white "><button class="btn btn-outline-info p-2"  disabled >Liste des .............</button></h3>
             <div class="progress blue">
             <div class="progress-value">87%</div>
-                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width:50%;">
+                <div class="progress-bar progress-bar-info progress-bar-striped " style="width:50%;">
                   
                 </div>
             </div>

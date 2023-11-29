@@ -37,8 +37,10 @@ $num = count($UsersData);
                     # code...
                  ?>
                     <tr>
-                    <td style=" width: 100px;  word-wrap: break-word;  white-space: normal;" ><?= $value["Email"] ?></td>
-                    <td style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Password"] ?></td>
+                    <th  scope="row"><div style=" width: 190px;  word-wrap: break-word;  white-space: normal;"><?= $value["Email"] ?></div></th>
+
+                    <td ><div style=" width: 100px;  word-wrap: break-word;  white-space: normal;"><?= $value["Password"] ?></div></td>
+
                     
                     <td style=" width: 100px;  word-wrap: break-word;  white-space: normal;">
                     <button onclick="AcceptRequest(<?= $value['id'] ?>)" type="button" class="btn btn-success mb-2 ms-2">Accept</button>
